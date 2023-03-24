@@ -1,0 +1,152 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <head>
+        <title>
+            User Login - Tambe Transport
+        </title>
+    
+    
+    {% comment %} #link for Responsive {% endcomment %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    {% comment %} #bootstrap link for css {% endcomment %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    {% comment %} #link for animation {% endcomment %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
+    {% comment %} link for bootstrap icons {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    
+    
+      </head>
+      <style>
+        body{
+          /* background: #fec107;*/
+           padding: 0 10px;
+           background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url(https://images.squarespace-cdn.com/content/v1/5ca3e1daca525b6d60ba7012/1559580314422-CC3GQ24S9Q0G3R8BTQ81/roadtrip.jpg);
+         }
+         img{
+           width:50%;
+         }
+      </style>
+<body>
+  {% comment %} <br><br>
+    <div class="container py-3" style="background:rgb(194,194,194); border-radius:10px; ">
+      <h4 class="text-center bg-primary alert mt-2">Welcome to Tambe Transport</h4>
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-6 offset-md-3 alert alert-danger">
+          {% for msg in messages %}
+          <h6>{{msg}}</h6>
+            {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+      <div class="row">
+        {% if user.is_authenticated %}
+         <h6 class='text-center'> Login Session is Alredy Running...</h6>
+         <a href="{% url 'index' %}">Home</a>
+         <a href="{% url 'user_choose_dashboard' %}">Dashboard</a>
+        {% else %}
+        <div class="col-md-6 offset-md-3 alert bg-primary text-center"> User Login</div>
+        <div class="col-md-6 offset-md-3 alert bg-primary"> 
+          <form action="" method="POST">
+            {% csrf_token %}
+          {{form.as_p}}
+      
+        </div>
+        <div class="col-md-6 offset-md-3 alert bg-primary text-center"> 
+          <input type="submit" class="btn btn-secondary px-5" value="Login"></input>
+          <a href="https://www.google.com/" class="btn btn-danger px-5">Exit</a>
+        </form>
+        </div>
+       <div class="col-md-6 offset-md-3 alert bg-primary text-white">&nbsp;<a href="{% url 'contact_us' %}" class="text-white">Contact Administrator !</a> </div> 
+       {% endif %}
+    </Div>
+  </div>
+ 
+
+  
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> 
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+
+    </div> {% endcomment %}
+
+    <center>
+      {% if user.is_authenticated %}
+      <h6 class='text-center text-white'> &nbsp; Login Session is Alredy Running...</h6><br>
+      <a href="{% url 'index' %}" class='text-center text-white'>Home</a><br>
+      <a href="{% url 'user_choose_dashboard' %}" class='text-center text-white'>Dashboard</a>
+      {% else %}
+    </center>
+      <div class="container">
+        <div class="row"> 
+          <div class="col-sm-12 text-center">
+          <h2 class="alert alert-primary mt-4">TAMBE TRANSPORT - USER LOGIN</h2>
+        </div>
+      </div>
+  
+      {% for msg in messages %}
+      <p class='alert alert-danger'>{{msg}}</p>
+      {% endfor %}
+  
+  
+     
+  
+        <div class="row">
+          <div class="col-sm-6">
+            <center>
+            <img src="{% static 'images/user_login.png' %}" alt="" style="width:70%; text-align:center; margin-top:20px;">
+          </center>
+          </div>
+          <div class="col-sm-6 text-white">
+           <center>
+            <img src="{% static 'images/user_login-heading-icon.png' %}" alt="">
+          </center>
+            <form action="" method="post" validate>{% csrf_token %}
+            {{form.username|as_crispy_field}}
+            {{form.password|as_crispy_field}}
+            <br>
+            <input type="submit" value="Login" style='width:100%' class="btn btn-primary">
+            <br>
+            <br>
+            <a href={% url 'index' %}  style='width:100%' class="btn btn-primary">Back to home</a>
+            </form>
+            <div class="alert alert-primary">
+              <h3>Use Creadential for login</h3>
+              <p>Username : User</p>
+              <p>Password : Pass@123</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+  
+</body>

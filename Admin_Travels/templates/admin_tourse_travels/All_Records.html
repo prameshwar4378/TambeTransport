@@ -1,0 +1,222 @@
+{% extends 'admin_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+{% block All_Records %}
+
+<div class="container">
+<h4 class="text-center alert alert-primary mt-2">All Records</h4>
+<form action="" method="get">{% csrf_token %}
+  <div class="row">
+        <div class="col-sm-6 "> 
+          {{filter.form.driver_name|as_crispy_field}}
+        </div>
+       <div class="col-sm-6"> 
+          {{filter.form.status|as_crispy_field}}
+        </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 "> 
+      {{filter.form.start_date|as_crispy_field}}
+    </div>
+    <div class="col-sm-6 "> 
+      {{filter.form.end_date|as_crispy_field}}
+    </div>
+</div>
+
+<div class="col-sm-12 text-center"> 
+      <input type="submit" class="btn btnbg px-5" value=" Search "> </input>
+    </div>
+ </form>
+    
+<div class="row">
+ <div class="col-md mt-2">
+  <div class="card text-center">
+      <div class="card-header alert-dark">
+      <b>Total Records</b>
+      </div>
+      <div class="card-header  py-2">
+       <h2 class="card-title">{{count}}</h2>
+      </div>
+  </div>
+ </div>
+ 
+ <div class="col-md mt-2">
+  <div class="card text-center">
+      <div class="card-header alert-dark">
+      <b>Record Export To Excel</b>
+      </div>
+      <div class="card-header  py-3">
+      <a href="{% url 'travel_export_excel' %}" class="btn btn-success px-4">Export </a>
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+<br>
+
+ <div class="table_scroll" >
+      <table class="table table-hover" >
+          {% if rec2 %}
+          <thead>
+            <tr style='background-color: rgb(3, 74, 116);'>
+                <th scope="col" class="text-center text-white">Sr.No</th>
+                <th scope="col" class="text-center text-white">Entry Number</th>
+                <th scope="col" class="text-center text-white">Driver Name</th>
+                <th scope="col" class="text-center text-white">Vehical_No</th>
+                <th scope="col" class="text-center text-white">Vehical_Type</th>
+                <th scope="col" class="text-center text-white">Arivel_City</th>
+                <th scope="col" class="text-center text-white">Arivel_Time</th>
+                <th scope="col" class="text-center text-white">Destination_City</th>
+                <th scope="col" class="text-center text-white">Drop_Time</th>
+                <th scope="col" class="text-center text-white">Opning_Km</th>
+                <th scope="col" class="text-center text-white">Closing_Km</th>
+                <th scope="col" class="text-center text-white">Total_Km</th>
+                <th scope="col" class="text-center text-white">Opning_Km_Photo</th>
+                <th scope="col" class="text-center text-white">Closing_Km_Photo</th>
+                <th scope="col" class="text-center text-white">Cust_Name</th>
+                <th scope="col" class="text-center text-white">Customer_Photo</th>
+                <th scope="col" class="text-center text-white">Diesel Mtr 1</th>
+                <th scope="col" class="text-center text-white">Diesel Mtr 2</th>
+                <th scope="col" class="text-center text-white">Diesel Mtr 3</th>
+                <th scope="col" class="text-center text-white">Diesel Mtr 4</th>
+                <th scope="col" class="text-center text-white">Status</th>
+                <th scope="col" class="text-center text-white">Print Receipt</th>
+                <th scope="col" class="text-center text-white">Edit Receipt</th>
+                <th scope="col" class="text-center text-white">Delete Record</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            {% for r in rec2 %}
+              <tr class="text-center">      
+                <td>{{forloop.counter}}</td>
+                <td>{{r.id}}</td>
+                <td>{{r.driver_name}}</td>
+                <td>{{r.vehical_no}}</td>
+                <td>{{r.vehical_type}}</td>
+                <td>{{r.arivel_city}}</td>
+                <td>{{r.arivel_time}}</td>
+                <td>{{r.destination_city}}</td>
+                {% if r.total_km %}
+                <td>{{r.destination_time}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                <td>{{r.opning_km}}</td>
+                {% if r.closing_km %}
+                <td>{{r.closing_km}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+                {% if r.total_km %}
+                <td>{{r.total_km}}</td>
+                {% else %}
+                <td>-</td>
+                {% endif %}
+
+                {% if r.opning_km_photo.url == '/media/static/default.jpg' %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                <td><a href="{{r.opning_km_photo.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% endif %}
+                
+                {% if r.closing_km_photo.url == '/media/static/default.jpg' %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                <td><a href="{{r.closing_km_photo.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% endif %}
+                <td>{{r.cust_name}}</td>
+  
+                {% if r.cust_photo.url == '/media/static/default.jpg' %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                <td><a href="{{r.cust_photo.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% endif %}
+
+                {% if r.diesel_meter_photo_1.url == '/media/static/default.jpg'   %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                {% if r.diesel_meter_photo_1 %}
+                <td><a href="{{r.diesel_meter_photo_1.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% else %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% endif %}
+                {% endif %}
+
+                {% if r.diesel_meter_photo_2.url == '/media/static/default.jpg'   %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                {% if r.diesel_meter_photo_2 %}
+                <td><a href="{{r.diesel_meter_photo_2.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% else %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% endif %}
+                {% endif %}
+
+                {% if r.diesel_meter_photo_3.url == '/media/static/default.jpg'   %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                {% if r.diesel_meter_photo_3 %}
+                <td><a href="{{r.diesel_meter_photo_3.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% else %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% endif %}
+                {% endif %}
+
+                {% if r.diesel_meter_photo_4.url == '/media/static/default.jpg'   %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% else %}
+                {% if r.diesel_meter_photo_4 %}
+                <td><a href="{{r.diesel_meter_photo_4.url}}" download><i class="bi bi-arrow-down-square-fill"></i>  Download</a></td>
+                {% else %}
+                <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+                {% endif %}
+                {% endif %}
+
+
+
+                {% if r.status == 'Droped' %}
+                <td> <b class="btn btn-success" disabled><i class="bi bi-check-circle"></i> {{r.status}} </b></td>
+                {% else %}
+                <td><b class="btn btn-danger"><i class="bi bi-x-circle"></i> {{r.status}}</b></td>
+                {% endif %}
+
+                <td><a href="{% url 'print_travel_receipt' r.id %}" class="btn btn-primary"><i class="bi bi-printer"></i> Print</a></td>
+                <td><a href="{% url 'update_travel_record' r.id %}" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Manage</a></td>
+                <td><form action="{% url 'delete_travel_record' r.id %}" method="post" class="d-inline" novalidate> {% csrf_token %}
+                <input type="submit" value="Delete" class="btn btn-danger">
+                </form></td>
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+        {% else %}
+        <center><h5>No Record Found</h5></center>
+        {% endif %}
+  </div>
+  </div>
+
+  <center>
+{% if rec %}
+<nav aria-label="Page navigation example mt-2">
+  <ul class="pagination justify-content-center">
+    {% if rec.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="/user_travels/droped_records/?page={{rec.previous_page_number}}" tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+    {% for n in pagenumbers %}
+    <li class="page-item"><a class="page-link" href="/user_travels/droped_records/?page={{n}}">{{n}}</a></li>
+    {% endfor %}
+    {% if rec.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="/user_travels/droped_records/?page={{rec.next_page_number}}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+  </center>
+{% endblock All_Records %}

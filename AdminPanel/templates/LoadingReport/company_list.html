@@ -1,0 +1,57 @@
+{% extends 'LoadingReport/Base.html' %}
+{% block title %} Manage Company {% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block Company_list %}
+<div class="container">
+    <h4 class="text-center alert alert-dark mt-2">Manage Company List</h4>
+
+<form action="" method="POST">{% csrf_token %}
+    {{form|crispy}}
+    <input type="submit" value="Add Company" class="btn btnbg">
+</form>
+<p class="text-center text-danger mt-2"> Note : Once you've changed the company's name. Then the pending & delivered records will be updated with the same name.</p>
+
+<div class="table_scroll">
+    <table class="table table-hover table_scroll" >
+        {% if dt %}
+        
+        <thead>
+          <tr>
+            <th scope="col" class="text-center text-white">ID</th>
+            <th scope="col" class="text-center text-white">Company_Name</th>
+            <th scope="col" class="text-center text-white">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for x in dt %}
+          <tr class="text-center">      
+            <td>{{x.id}}</td>
+            <td>{{x.Company_Name}}</td>
+            <td><a href="{% url 'updatecompany' x.id %}" class="btn btnbg px-5">Edit</a>
+            
+            {% comment %} <form action="{% url 'deletecompany' x.id %}" method='POST' class="d-inline" novalidate>
+                {% csrf_token %}
+                
+                <input type="submit" value="Delete" class="btn btn-danger"></td>
+              </form> {% endcomment %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+            <h5 class="text-center text-secondary mt-6">No Record Found</h5>
+      {% endif %}
+    </div>
+</div>
+</div>
+
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+{% endblock Company_list %}

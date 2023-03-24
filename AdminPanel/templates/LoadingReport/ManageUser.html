@@ -1,0 +1,84 @@
+{% extends 'LoadingReport/Base.html' %}
+{% block title %} Manage User{% endblock title %}
+{% block ManageUser %}
+<h3 class="text-center mt-2 alert alert-dark">Manage User</h3>
+<br>
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-3 ml-2">
+        <h4 class="text-center alert alert-dark">Add New User</h4>
+        {{form.as_p}}
+        <input type="submit" value="Submit" class="btn btnbg mt-2 px-5">
+        <input type="reset" value="Reset" class="btn btn-warning mt-2 px-5">
+    </form>
+    </div>
+    <div class="col-sm-8 ">
+      <h4 class="text-center alert alert-dark">User Records</h4>
+      <div class="Row">
+        <Div class="col-sm-4 py-3">
+        </Div>
+
+        <div class="col-sm-6 text-right py-3">
+          <a href="{% url 'export_users' %}" class="btn btnbg">Export To Excel </a>
+
+        </div>
+
+      </div>
+<p class="text-center text-danger mt-2"> Note : Please. Before you create a user, keep in mind that you won't be able to delete it.</p>
+
+      <div class="table_scroll">
+        <table class="table table-hover table_scroll">
+            {% if dt %}
+            
+            <thead>
+              <tr>
+                <th scope="col" class="text-center text-white">ID</th>
+                <th scope="col" class="text-center text-white">Username</th>
+                <th scope="col" class="text-center text-white">Driver Name</th>
+                <th scope="col" class="text-center text-white">License Number</th>
+                <th scope="col" class="text-center text-white">Email</th>
+                <th scope="col" class="text-center text-white">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for x in dt %}
+              <tr class="text-center">      
+                <td>{{x.id}}</td>
+                <td>{{x.username}}</td>
+                <td>{{x.first_name}}</td>
+                <td>{{x.last_name}}</td>
+                <td>{{x.email}}</td>
+                <td><a href="{% url 'update_user_data' x.id %}" class="btn btnbg">Edit</a>
+                
+                {% comment %} <form action="{% url 'delete_data' x.id %}" method='POST' class="d-inline" novalidate>
+                    {% csrf_token %}
+                    
+                    <input type="submit" value="Delete" class="btn btn-danger"></td>
+                  </form> {% endcomment %}
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          {% else %}
+                <h5 class="text-center text-secondary mt-6">No Record Found</h5>
+          {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+<br><br>
+{% endblock ManageUser %}
+
+{% block UserCreation %}
+
+
+{% endblock UserCreation %}

@@ -1,0 +1,45 @@
+
+{% extends 'user_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+{% block drop_cust %}
+<script>
+function calculate_total_km(value){
+    var opning_km,closing_km,total_km;
+    opning_km=Number(document.getElementById('id_opning_km').value);
+    closing_km=Number(document.getElementById('id_closing_km').value);
+    calculate_total= closing_km - opning_km ;
+    Number(document.getElementById('id_total_km').value=calculate_total);
+  }
+</script>
+<div class="container">
+    <h4 class="text-center alert alert-primary mt-2"> Drop Customer</h4>
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+    
+    {{fm.cust_name|as_crispy_field}}
+    {{fm.opning_km|as_crispy_field}}
+    {{fm.closing_km|as_crispy_field}}
+    {{fm.total_km|as_crispy_field}}
+    {{fm.closing_km_photo|as_crispy_field}}
+    {{fm.status.as_hidden}}
+    {% comment %} {{fm.Status.as_hidden}} {% endcomment %}
+
+    <hr>
+    <input type="submit" value="Submit" class="btn btn-success px-5">
+</form>
+</div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+{% endblock drop_cust %}

@@ -1,0 +1,100 @@
+{% extends 'user_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+{% block pending_records %}
+<h4 class="text-center alert alert-primary mt-2">Droped Records</h4>
+ <div class="table_scroll" >
+      <table class="table table-hover" >
+          {% if rec %}
+          <thead>
+            <tr style='background-color: rgb(3, 74, 116);'>
+                <th scope="col" class="text-center text-white">Sr.No</th>
+                <th scope="col" class="text-center text-white">Entry Number</th>
+                <th scope="col" class="text-center text-white">Vehical_No</th>
+                <th scope="col" class="text-center text-white">Vehical_Type</th>
+                <th scope="col" class="text-center text-white">Arivel_City</th>
+                <th scope="col" class="text-center text-white">Arivel_Time</th>
+                <th scope="col" class="text-center text-white">Destination_City</th>
+                <th scope="col" class="text-center text-white">Drop_Time</th>
+                <th scope="col" class="text-center text-white">Opning_Km</th>
+                <th scope="col" class="text-center text-white">Closing_Km</th>
+                <th scope="col" class="text-center text-white">Total_Km</th>
+                <th scope="col" class="text-center text-white">Opning_Km_Photo</th>
+                <th scope="col" class="text-center text-white">Closing_Km_Photo</th>
+                <th scope="col" class="text-center text-white">Cust_Name</th>
+                <th scope="col" class="text-center text-white">Cust_Photo</th>
+                <th scope="col" class="text-center text-white">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for r in rec %}
+              <tr class="text-center">      
+                <td>{{forloop.counter}}</td>
+                <td>{{r.id}}</td>
+                <td>{{r.vehical_no}}</td>
+                <td>{{r.vehical_type}}</td>
+                <td>{{r.arivel_city}}</td>
+                <td>{{r.arivel_time}}</td>
+                <td>{{r.destination_city}}</td>
+                <td>{{r.destination_time}}</td>
+                <td>{{r.opning_km}}</td>
+                <td>{{r.closing_km}}</td>
+                <td>{{r.total_km}}</td>
+                <td><a href="{{r.opning_km_photo.url}}" download> Download</a></td>
+                <td><a href="{{r.closing_km_photo.url}}" download> Download</a></td>
+                <td>{{r.cust_name}}</td>
+  
+                {% if r.cust_photo.url == '/media/static/default.jpg' %}
+                <td>-</td>
+                {% else %}
+                <td><a href="{{r.cust_photo.url}}" download> Download</a></td>
+                {% endif %}
+                <td> <i class="btn btn-dark"> Droped</i></td>
+             
+              </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+        {% else %}
+        <center><h5>No Record Found</h5></center>
+        {% endif %}
+  </div>
+  </div>
+  
+
+  <center>
+      
+{% if rec %}
+<nav aria-label="Page navigation example mt-2">
+  <ul class="pagination justify-content-center">
+    {% if rec.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="/user_travels/droped_records/?page={{rec.previous_page_number}}" tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+    {% for n in pagenumbers %}
+    <li class="page-item"><a class="page-link" href="/user_travels/droped_records/?page={{n}}">{{n}}</a></li>
+    {% endfor %}
+    {% if rec.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="/user_travels/droped_records/?page={{rec.next_page_number}}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+  </center>
+
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    {% for msg in messages %}
+    swal("Done", "{{msg}}", "success");
+  {% endfor %}
+  </script>
+  
+{% endblock pending_records %}

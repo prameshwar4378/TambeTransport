@@ -1,0 +1,74 @@
+{% extends 'admin_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+{% block update_records %}
+<script>
+    function calculate_total_km(value){
+        var opning_km,closing_km,total_km;
+        opning_km=Number(document.getElementById('id_opning_km').value);
+        closing_km=Number(document.getElementById('id_closing_km').value);
+        calculate_total= closing_km - opning_km ;
+        Number(document.getElementById('id_total_km').value=calculate_total);
+      }
+</script>
+<div class="container">
+<h4 class="text-center alert alert-primary mt-2">Update Records</h4>
+<form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+<div class="row">
+    <div class="col-sm-6">
+        {{fm.vehical_no|as_crispy_field}}
+        {{fm.vehical_type|as_crispy_field}}
+        {{fm.arivel_city|as_crispy_field}}
+        {{fm.destination_city|as_crispy_field}}
+    </div>
+    <div class="col-sm-6">
+        {{fm.opning_km|as_crispy_field}}
+        {{fm.closing_km|as_crispy_field}}
+        {{fm.total_km|as_crispy_field}}
+        {{fm.cust_name|as_crispy_field}}
+    </div>
+</div>
+{{fm.status|as_crispy_field}}
+
+<br>
+<div style="background-color:#C7E7E7; width:100%; padding:5px 5px; border-radius:3px;"><b>Order By</b></div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-6">{{fm.order_by|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.order_by_photo|as_crispy_field}}</div>
+    </div>
+
+<br>
+<div style="background-color:#C7E7E7; width:100%; padding:5px 5px; border-radius:3px;"><b>Toll Records</b></div>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_1|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_1|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_2|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_2|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_3|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_3|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_4|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_4|as_crispy_field}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_5|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_5|as_crispy_field}}</div>
+    </div>  
+    <div class="row">
+        <div class="col-sm-6">{{fm.toll_name_6|as_crispy_field}}</div>
+        <div class="col-sm-6">{{fm.toll_amount_6|as_crispy_field}}</div>
+    </div>
+    <center>
+    <input type="submit" value="Update Now" class='btn btn-primary'>
+</center>
+</form>
+</div>
+{% endblock update_records %}

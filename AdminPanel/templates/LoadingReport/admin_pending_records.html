@@ -1,0 +1,89 @@
+{% extends 'LoadingReport/Base.html' %}
+{% block title %} Pending Records {% endblock title %}
+{% block Admin_Pending_Records %}
+
+<div class="container">
+  <div class="col-sm-12">
+    <h4 class="text-center alert alert-dark mt-2">Admin Pending Records</h4>
+    <div class="table_scroll">
+      <table class="table table-hover">
+        {% if rec %}
+        <thead>
+          <tr style="background-color: rgb(3, 74, 116);">
+            <th scope="col" class="text-center text-white" style="">Sr.No</th>
+            <th scope="col" class="text-center text-white">Entry Number</th>
+            <th scope="col" class="text-center text-white">Driver User ID</th>
+            <th scope="col" class="text-center text-white">LR No</th>
+            <th scope="col" class="text-center text-white">Vehical No</th>
+            <th scope="col" class="text-center text-white">From Company</th>
+            <th scope="col" class="text-center text-white">Adress</th>
+            <th scope="col" class="text-center text-white">Bins or Boxes</th>
+            <th scope="col" class="text-center text-white">Loading Receipt</th>
+            <th scope="col" class="text-center text-white">Loading Date</th>
+            <th scope="col" class="text-center text-white">Invoice No</th>
+            <th scope="col" class="text-center text-white">Status</th>
+            <th scope="col" class="text-center text-white">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in rec %}
+          <tr class="text-center">
+            <td>{{forloop.counter}}</td>
+            <td>{{r.id}}</td>
+            <td>{{r.Driver_Name}}</td>
+            <td>{{r.From_LR_No}}</td>
+            <td>{{r.Vehical_No}}</td>
+            <td>{{r.From_company}}</td>
+            <td>{{r.From_Adress}}</td>
+            <td>{{r.Bins}}</td>
+
+
+            {% if r.From_File.url == '/media/static/default.png' %}
+            <td>-</td>
+            {% else %}
+            <td><a href="{{r.From_File.url}}" download>{{r.From_File}}</a></td>
+            {% endif %}
+
+            {% if r.From_File2.url == '/media/static/default.png' %}
+            <td>-</td>
+            {% else %}
+            <td><a href="{{r.From_File2.url}}" download>{{r.From_File}}</a></td>
+            {% endif %}
+
+            <td>{{r.From_Date}}</td>
+
+            {% if r.Invoice %}
+            <td>{{r.Invoice}}</td>
+            {% else %}
+            <dt>-</dt>
+            {% endif %}
+
+            <td>{{r.Status}}</td>
+            <form action="" method="POST">
+              {% csrf_token %}
+              {% if r.From_Adress|length < 3 %}
+              <td><a href="{% url 'generate_lr' r.id %}" class="btn btnbg">Generate LR</a></td>
+              {% else %}
+              <td><a href="{% url 'print_lr' r.id %}" class="btn btn-success px-4"> Print LR</a></td>
+              {% endif %}
+            </form>
+
+
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <center>
+      <h5>No Record Found</h5>
+    </center>
+    {% endif %}
+  </div>
+</div>
+</center>
+
+
+{% endblock Admin_Pending_Records %}

@@ -1,0 +1,268 @@
+{% extends 'LoadingReport/Base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}All Records{% endblock title %}
+{% block Admin_Vehical_Records %}
+
+
+<div class="container">
+
+  <div class="row ">
+    <div class="col-sm-12">
+      <h4 class="text-center alert alert-dark mt-2">All Records</h4>
+    </div>
+  </div>
+
+  <form action="" method="get">{% csrf_token %}
+    <div class="row">
+      <div class="col-sm-3 ">
+        {{filter.form.Auto_LR_No|as_crispy_field}}
+      </div>
+      <div class="col-sm-3">
+        {{filter.form.Driver_Name|as_crispy_field}}
+      </div>
+      <div class="col-sm-3">
+        {{filter.form.From_company|as_crispy_field}}
+      </div>
+      <div class="col-sm-3">
+        {{filter.form.To_company|as_crispy_field}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4 ">
+        {{filter.form.start_date|as_crispy_field}}
+      </div>
+      <div class="col-sm-4">
+        {{filter.form.end_date|as_crispy_field}}
+      </div>
+      <div class="col-sm-4">
+        {{filter.form.Status|as_crispy_field}}
+      </div>
+
+    </div>
+    <div class="col-sm-12 text-center">
+      <input type="submit" class="btn btnbg px-5" value=" Search "> </input>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md mt-2">
+      <div class="card text-center">
+        <div class="card-header alert-dark">
+          <b>Total Records</b>
+        </div>
+        <div class="card-header  py-2">
+          <h2 class="card-title">{{count}}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md mt-2">
+      <div class="card text-center">
+        <div class="card-header alert-dark">
+          <b>Record Export To Excel</b>
+        </div>
+        <div class="card-header  py-3">
+          <a href="{% url 'export_data' %}" class="btn btn-success px-4">Export </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="table_scroll">
+    <table class="table table-hover">
+      {% if rec %}
+      <thead>
+        <tr style='background-color: rgb(3, 74, 116);'>
+          <th scope="col" class="text-center text-white">Sr.No</th>
+          <th scope="col" class="text-center text-white">Entry Number</th>
+          <th scope="col" class="text-center text-white">Tambe LR No</th>
+          <th scope="col" class="text-center text-white">Driver User ID</th>
+          <th scope="col" class="text-center text-white">From LR No</th>
+          <th scope="col" class="text-center text-white">Invoice No</th>
+          <th scope="col" class="text-center text-white">Vehical No</th>
+          <th scope="col" class="text-center text-white">From Company</th>
+          <th scope="col" class="text-center text-white">To Company</th>
+          <th scope="col" class="text-center text-white">Bins or Boxes</th>
+          <th scope="col" class="text-center text-white">Loading Receipt 1</th>
+          <th scope="col" class="text-center text-white">Loading Receipt 2</th>
+          <th scope="col" class="text-center text-white">Loading Date</th>
+
+          <th scope="col" class="text-center text-white">UnLoading Receipt 1</th>
+          <th scope="col" class="text-center text-white">UnLoading Receipt 2</th>
+          <th scope="col" class="text-center text-white">UnLoading Receipt 3</th>
+          <th scope="col" class="text-center text-white">UnLoading Receipt 4</th>
+          <th scope="col" class="text-center text-white">UnLoading Receipt 5</th>
+          <th scope="col" class="text-center text-white">UnLoading Date</th>
+          <th scope="col" class="text-center text-white">Receiver</th>
+          <th scope="col" class="text-center text-white">Status</th>
+          <th scope="col" class="text-center text-white">LR Action</th>
+          <th scope="col" class="text-center text-white">Update LR</th>
+          <th scope="col" class="text-center text-white">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in rec %}
+        <tr class="text-center">
+          <td>{{forloop.counter}}</td>
+          <td>{{r.id}}</td>
+          {% if r.Auto_LR_No %}
+          <td>{{r.Auto_LR_No}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+          <td>{{r.Driver_Name}}</td>
+          <td>{{r.From_LR_No}}</td>
+
+          {% if r.Invoice %}
+          <td>{{r.Invoice}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+
+          <td>{{r.Vehical_No}}</td>
+          <td>{{r.From_company}}</td>
+
+          {% if r.To_company %}
+          <td>{{r.To_company}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+          <td>{{r.Bins}}</td>
+          {% if r.From_File.url  == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.From_File.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+          {% if r.From_File2.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.From_File2.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          <td>{{r.From_Date}}</td>
+
+          {% if r.To_File.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.To_File.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          {% if r.To_File2.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.To_File2.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          {% if r.To_File3.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.To_File3.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          {% if r.To_File4.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.To_File4.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          {% if r.To_File5.url == '/media/static/default.png' %}
+          <td><i class="bi bi-file-earmark-x-fill text-danger"></i></td>
+          {% else %}
+          <td><a href="{{r.To_File5.url}}" download><i class="bi bi-arrow-down-square-fill"></i> Download</a></td>
+          {% endif %}
+
+          {% if r.Status == "Delivered" %}
+          <td>{{r.To_Date}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+
+          {% if r.Status == "Delivered" %}
+          <td>{{r.Receiver}}</td>
+          {% else %}
+          <td>-</td>
+          {% endif %}
+
+          {% if r.Status == "Delivered" %}
+          <td>
+            <p class="btn btn-success"><i class="bi bi-check-circle"></i> {{r.Status}}</p>
+          </td>
+          {% else %}
+          <td>
+            <p class="btn btn-danger"><i class="bi bi-x-circle"></i> {{r.Status}}</p>
+          </td>
+          {% endif %}
+
+
+
+          <td> {% if r.From_Adress|length < 3 %}
+            <a href="{% url 'generate_lr' r.id %}" class="btn btnbg"><i class="bi bi-pencil-square"></i> Generate LR</a>
+            {% else %}
+            <a href="{% url 'print_lr' r.id %}" class="btn btn-success px-4"><i class="bi bi-printer"></i> Print LR</a>
+            {% endif %}</td>
+          <td>
+            {% if r.From_Adress|length > 3 %}
+            <a href="{% url 'update_lr' r.id %}" class="btn btnbg"><i class="bi bi-pencil-square"></i> Update LR</a>
+            {% else %}
+            <a class="btn btn-secondary"> Update LR</a>
+            {% endif %}</td>
+          </td>
+
+          <td>
+            <a href="{% url 'update_vehical_record' r.id %}" class="btn btn-warning px-4"><i
+                class="bi bi-pencil-square"></i> Edit</a> &nbsp;&nbsp;&nbsp;
+            <form action="{% url 'delete_vehical_record' r.id %}" method='POST' class="d-inline" novalidate>
+              {% csrf_token %}
+              <input type="submit" value="Delete" class="btn btn-danger"></td>
+          </form>
+          </Td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <center>
+    <h5>No Record Found</h5>
+  </center>
+  {% endif %}
+</div>
+
+<br>
+<nav aria-label="Page navigation example mt-2">
+  <ul class="pagination justify-content-center">
+    {% if rec.has_previous %}
+    <li class="page-item ">
+      <a class="page-link" href="/Admin_Home/admin_vehical_records/?page={{rec.previous_page_number}}"
+        tabindex="-1">Previous</a>
+    </li>
+    {% endif %}
+    {% for n in pagenumbers %}
+    <li class="page-item"><a class="page-link" href="/Admin_Home/admin_vehical_records/?page={{n}}">{{n}}</a></li>
+    {% endfor %}
+    {% if rec.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="/Admin_Home/admin_vehical_records/?page={{rec.next_page_number}}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</center>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {
+    %
+    for msg in messages %
+  }
+  swal("Done", "{{msg}}", "success"); {
+    % endfor %
+  }
+</script>
+
+
+{% endblock Admin_Vehical_Records %}

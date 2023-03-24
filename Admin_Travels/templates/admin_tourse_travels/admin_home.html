@@ -1,0 +1,65 @@
+{% extends 'admin_tourse_travels/Base.html' %}
+{% block admin_Home %}
+
+<div class="container">
+    <h4 class="text-center alert alert-dark mt-4">Admin Dashboard</h4>
+    <div class="row">
+    <div class="col-md mt-2" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1000">
+        <div class="card text-center">
+            <div class="card-header alert-dark">
+              <b> Droped Records</b>
+            </div>
+            <div class="card-header py-4">
+             <h3 class="card-title">{{count_droped}}</h3>
+             <a href="{% url 'admin_travel_all_records' %}" class="btn btnbg" class="btn btnbg"  data-aos="flip-up" data-aos-delay="600" data-aos-duration="1000" >Check</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md mt-2" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="1000">
+            <div class="card text-center">
+                <div class="card-header alert-dark">
+                <b>Pending Records</b>
+                </div>
+                <div class="card-header  py-4">
+                 <h3 class="card-title">{{count_pending}}</h3>
+             <a href="{% url 'admin_travel_all_records' %}" class="btn btnbg" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="1000">Check</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md mt-2" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
+            <div class="card text-center">
+                <div class="card-header alert-dark">
+                <b>Total Records</b>
+                </div>
+                <div class="card-header py-4">
+                 <h3 class="card-title">{{count_all}}</h3>
+                 <a href="{% url 'admin_travel_all_records' %}" class="btn btnbg" data-aos="zoom-in" data-aos-delay="1000" data-aos-duration="1000">Check</a>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md mt-2" data-aos="zoom-in" data-aos-delay="800" data-aos-duration="1000">
+                <div class="card text-center">
+                    <div class="card-header alert-dark">
+                    <b> Number of Users</b>
+                    </div>
+                    <div class="card-header  py-4">
+                     <h3 class="card-title">{{count_user_all}}</h3>
+                 <a href="{% url 'manageuser' %}" class="btn btnbg" data-aos="zoom-in" data-aos-delay="1200" data-aos-duration="1000">Check</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+
+{% endblock admin_Home %}

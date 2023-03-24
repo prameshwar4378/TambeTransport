@@ -1,0 +1,219 @@
+{% extends 'LoadingReport/Base.html' %}
+{% block title %} Generate LR {% endblock title %}
+{% load crispy_forms_tags %}
+{% block ManageUser %}
+
+<script>
+  function additionToPay(value){
+    var a,b,c,d,e,f,g,h,i,j,CALCULATE_GST,SUB_TOTAL_ToPay;
+    a=Number(document.getElementById('id_Freight_ToPay').value);
+    b=Number(document.getElementById('id_ST_Charges_ToPay').value);
+    c=Number(document.getElementById('id_Value_Subcharge_ToPay').value);
+    d=Number(document.getElementById('id_AOC_ToPay').value);
+    e=Number(document.getElementById('id_Hamali_Charges_ToPay').value);
+    f=Number(document.getElementById('id_Other_Charges_ToPay').value);
+    g=Number(document.getElementById('id_Door_Delivery_ToPay').value);
+    SUB_TOTAL_ToPay= a + b + c + d + e + f + g ;
+    h=Number(document.getElementById('id_SUB_TOTAL_ToPay').value=SUB_TOTAL_ToPay);
+    f=Number(document.getElementById('id_GST_ToPay_Per').value);
+    i=f+100
+    CALCULATE_GST= (h * i)/100;
+    Number(document.getElementById('id_GST_ToPay').value= CALCULATE_GST - SUB_TOTAL_ToPay);
+    Number(document.getElementById('id_GRAND_TOTAL_ToPay').value=CALCULATE_GST);
+  }
+
+  function additionPaid(value){
+    var a,b,c,d,e,f,g,h,i,CALCULATE_GST,SUB_TOTAL_Paid;
+    a=Number(document.getElementById('id_Freight_Paid').value);
+    b=Number(document.getElementById('id_ST_Charges_Paid').value);
+    c=Number(document.getElementById('id_Value_Subcharge_Paid').value);
+    d=Number(document.getElementById('id_AOC_Paid').value);
+    e=Number(document.getElementById('id_Hamali_Charges_Paid').value);
+    f=Number(document.getElementById('id_Other_Charges_Paid').value);
+    g=Number(document.getElementById('id_Door_Delivery_Paid').value);
+    SUB_TOTAL_Paid= a + b + c + d + e + f + g ;
+    h=Number(document.getElementById('id_SUB_TOTAL_Paid').value=SUB_TOTAL_Paid);
+    f=Number(document.getElementById('id_GST_Paid_Per').value);
+    i=f+100
+    CALCULATE_GST= (h * i)/100;
+    Number(document.getElementById('id_GST_Paid').value=CALCULATE_GST - SUB_TOTAL_Paid);
+    Number(document.getElementById('id_GRAND_TOTAL_Paid').value=CALCULATE_GST);
+  }
+  </script>
+    {% comment %} 
+    
+
+    {% endcomment %}
+
+<div class="container">
+    <h4 class="text-center alert alert-success mt-2">Generate-LR</h4>
+<br>
+
+{% comment %} 'Vehical_No','Auto_LR_No',
+'From_company','From_Adress','From_Mobile',
+'To_company','To_Adress','To_Mobile',
+'Bins','Receiver','Invoice',
+
+'Freight_ToPay','ST_Charges_ToPay','Value_Subcharge_ToPay','AOC_ToPay','Hamali_Charges_ToPay',
+'Other_Charges_ToPay','Door_Delivery_ToPay','SUB_TOTAL_ToPay','GST_ToPay','GRAND_TOTAL_ToPay',
+
+'Freight_Paid','ST_Charges_Paid','Value_Subcharge_Paid','AOC_Paid','Hamali_Charges_Paid',
+'Other_Charges_Paid','Door_Delivery_Paid','SUB_TOTAL_Paid','GST_Paid','GRAND_TOTAL_Paid',
+                   {% endcomment %}
+
+  <form  method="POST" novalidate>
+  {% csrf_token %}
+
+<div class="container">                    
+  <div class="row">
+    <div class="col-sm-3 py-1">
+      <div>
+        {% comment %} <p class="alert alert-dark">{{fm.Auto_LR_No.label}}</p> {% endcomment %}
+        {{fm.Auto_LR_No|as_crispy_field}}
+        {% comment %} {{dt}} {% endcomment %}
+      </div>
+    </div>
+    <div class="col-sm-3 py-1">
+      <div>
+        {% comment %} <p class="alert alert-dark">{{fm.Vehical_No.label}}</p> {% endcomment %}
+        {{fm.Vehical_No|as_crispy_field}}
+      </div>
+    </div>
+    <div class="col-sm-3 py-1">
+      <div>
+        {{fm.E_Way_Bill|as_crispy_field}}
+        {% comment %} <p class="alert alert-dark">E Way Bill No</p> {% endcomment %}
+      </div>
+    </div>
+    <div class="col-sm-3 py-1">
+      <div>
+        {% comment %} <p class="alert alert-dark">{{fm.Invoice.label}}</p> {% endcomment %}
+        {{fm.Invoice|as_crispy_field}}
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mt-4">
+      <p class="alert alert-dark">From</p>
+      <p>{{fm.From_company|as_crispy_field}}</p>
+      <p>{{fm.From_Adress|as_crispy_field}}</p>
+      <p>{{fm.From_Mobile|as_crispy_field}}</p>
+      <p>{{fm.From_Branch_Code|as_crispy_field}}</p>
+    </div>
+    <div class="col-sm-6 mt-4 ">
+      <p class="alert alert-dark">To</p>
+      <p> {{fm.To_company|as_crispy_field}}</p>
+      <p>{{fm.To_Adress|as_crispy_field}}</p>
+      <p>{{fm.To_Mobile|as_crispy_field}}</p>
+      <p>{{fm.To_Branch_Code|as_crispy_field}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 mt-4">
+      <p class="alert alert-dark">To Pay</p>
+      <p> {{fm.Freight_ToPay|as_crispy_field}}</p>
+      <p>  {{fm.ST_Charges_ToPay|as_crispy_field}}</p>
+      <p> {{fm.Value_Subcharge_ToPay|as_crispy_field}}</p>
+      <p> {{fm.AOC_ToPay|as_crispy_field}}</td></p>
+      <p> {{fm.Hamali_Charges_ToPay|as_crispy_field}}</p>
+      <p> {{fm.Other_Charges_ToPay|as_crispy_field}}</p>
+      <p> {{fm.Door_Delivery_ToPay|as_crispy_field}}</p>
+      <p> {{fm.SUB_TOTAL_ToPay|as_crispy_field}}</p>
+      <p> {{fm.GST_ToPay_Per|as_crispy_field}}</p>
+      <p> {{fm.GST_ToPay|as_crispy_field}}</p>
+      <p> {{fm.GRAND_TOTAL_ToPay|as_crispy_field}}</p>
+    </div>
+
+    <div class="col-sm-6 mt-4">
+      <p class="alert alert-dark">To Paid</p>
+      <p>  {{fm.Freight_Paid|as_crispy_field}}</p>
+      <p>  {{fm.ST_Charges_Paid|as_crispy_field}}</p>
+      <p> {{fm.Value_Subcharge_Paid|as_crispy_field}}</p>
+      <p> {{fm.AOC_Paid|as_crispy_field}}</p>
+      <p> {{fm.Hamali_Charges_Paid|as_crispy_field}}</p>
+      <p> {{fm.Other_Charges_Paid|as_crispy_field}}</p>
+      <p> {{fm.Door_Delivery_Paid|as_crispy_field}}</p>
+      <p> {{fm.SUB_TOTAL_Paid|as_crispy_field}}</p>
+      <p> {{fm.GST_Paid_Per|as_crispy_field}}</p>
+      <p> {{fm.GST_Paid|as_crispy_field}}</p>
+      <p> {{fm.GRAND_TOTAL_Paid|as_crispy_field}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <p class="alert alert-dark mt-3 ">Section 1</p>
+    <div class="row">
+    <br>
+    <div class="col-sm-3">{{fm.Bins|as_crispy_field}}</div>
+    <div class="col-sm-3">{{fm.Actual_Weight|as_crispy_field}}</div>
+    <div class="col-sm-3">{{fm.Charged_Weight|as_crispy_field}}</div>
+    <div class="col-sm-3">{{fm.Item_Type|as_crispy_field}}</div>
+  </div>
+</div>
+
+<div class="container">
+  <p class="alert alert-dark  mt-3">Section 2</p>
+  <div class="row">
+    <div>
+      
+    </div>
+    <div class="col-sm-6">{{fm.Description|as_crispy_field}}</div>
+    <div class="col-sm-6">{{fm.Delivery_At|as_crispy_field}}</div>
+  </div>
+</div>
+
+
+  
+  {% comment %} {{fm.AOC_ToPay.label}}
+  {{fm.Hamali_Charges_ToPay.label}}
+  {{fm.Other_Charges_ToPay.label}}
+  {{fm.Door_Delivery_ToPay.label}}
+  {{fm.SUB_TOTAL_ToPay.label}}
+  {{fm.GST_ToPay.label}}
+  {{fm.GRAND_TOTAL_ToPay.label}}
+
+  
+  {{fm.Freight_Paid.label}}
+  {{fm.ST_Charges_Paid.label}}
+  {{fm.Value_Subcharge_Paid.label}}
+  {{fm.AOC_Paid.label}}
+  {{fm.Hamali_Charges_Paid.label}}
+  {{fm.Other_Charges_Paid.label}}
+  {{fm.Door_Delivery_Paid.label}}
+  {{fm.SUB_TOTAL_Paid.label}}
+  {{fm.GST_Paid.label}}
+  {{fm.GRAND_TOTAL_Paid.label}} {% endcomment %}
+ 
+  <div class="container">
+    <div class="row text-center mt-3">
+      <div class="col-sm-12">
+      <input type="submit" value="Generate LR" class="btn btn-primary px-5 py-2">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    {% for msg in messages %}
+    swal("Done", "{{msg}}", "success");
+  {% endfor %}
+  </script>
+  
+
+
+</div>
+</div>
+
+
+</form>
+
+
+
+{% endblock ManageUser %}

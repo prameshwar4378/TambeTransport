@@ -1,0 +1,78 @@
+<html>
+    <head>
+        
+        <title>Contact Us
+        </title>
+        
+    </head>
+{% load crispy_forms_tags %}
+{% load static %}
+        
+  
+    {% comment %} #link for Responsive {% endcomment %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    {% comment %} #bootstrap link for css {% endcomment %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    {% comment %} #link for animation {% endcomment %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
+    {% comment %} link for bootstrap icons {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+
+
+<style>
+      .main{
+          border:2px solid black;
+      }
+      body{
+          background:rgb(169,212,225)
+      }
+  </style>
+  <body><br><br>
+    <div class="container py-3">
+     
+      <div class="row">
+        <div class="col-md-6 offset-md-3 alert text-center" style="background:rgb(59,143,169); color:white;"> Contact Us</div>
+        <div class="col-md-6 offset-md-3 alert" style="background:rgb(59,143,169); color:white;"> 
+          <form action="" method="POST">
+            {% csrf_token %}
+          {{fm|crispy}}
+          {% comment %} <input type="submit" value="Submit"> {% endcomment %}
+        </div>
+        <div class="col-md-6 offset-md-3 alert text-center" style="background:rgb(59,143,169); color:white;"> 
+          <input type="submit" class="btn btn-secondary px-5" value="Submit"></input>
+          <a href="https://www.google.com/" class="btn btn-danger px-5">Exit</a>
+        </form>
+        </div>
+       <div class="col-md-6 offset-md-3 alert  text-white" style="background:rgb(59,143,169); color:white;">&nbsp;
+           <h6 class="text-white"><i class="bi bi-person-fill"></i>&nbsp;&nbsp; Mr.Nitin Tambe</h6>
+           <h6 class="text-white"><i class="bi bi-envelope-fill"></i> &nbsp;&nbsp;tambetransport7096@gmail.com</h6>
+           <h6 class="text-white"><i class="bi bi-telephone-fill"></i>&nbsp;&nbsp; 9923155578/9825252625</h6>
+           <h6 class="text-white"><i class="bi bi-geo-alt-fill"></i> &nbsp;&nbsp;Waluj MIDC, Ranjangaon (S.P), Tq.Gangapur Dist.Aurangabad</h6>
+
+    
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+  </script>
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+
+    </div>
+  </body>
+  </html>

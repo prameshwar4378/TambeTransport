@@ -1,0 +1,39 @@
+{% extends 'user_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+
+{% block new_entry %}
+<div class="container">
+    <h4 class="text-center alert alert-primary mt-2">New Entry</h4>
+    <form action="" method="POST" enctype="multipart/form-data"  novalidate>{% csrf_token %}
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{fm.vehical_no|as_crispy_field}}
+            {{fm.vehical_type|as_crispy_field}}
+            {{fm.arivel_city|as_crispy_field}}
+            {{fm.destination_city|as_crispy_field}}
+        </div>
+        <div class="col-sm-6">
+            {{fm.opning_km|as_crispy_field}}
+            {{fm.opning_km_photo|as_crispy_field}}
+            {{fm.cust_name|as_crispy_field}}
+            {{fm.cust_photo|as_crispy_field}}
+        </div>
+    </div> <br>
+    <center>
+        <input type="submit" value="Submit" class='btn btn-primary px-4'>
+    </center>
+</form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+{% endblock new_entry %}

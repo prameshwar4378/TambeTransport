@@ -1,0 +1,38 @@
+
+{% extends 'UserApp/user_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}New Entry{% endblock title %}
+{% block load_vehical %}
+
+<div class="container">
+    <h4 class="text-center alert alert-primary mt-2">New Entry</h4>
+
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+ 
+    {{entry_form.From_LR_No|as_crispy_field}}
+    {{entry_form.Vehical_No|as_crispy_field}}
+    {{entry_form.From_company|as_crispy_field}}
+    {{entry_form.To_company|as_crispy_field}}
+    {{entry_form.Bins|as_crispy_field}}
+    {{entry_form.From_File|as_crispy_field}}
+    {{entry_form.From_File2|as_crispy_field}}
+    {{entry_form.Invoice|as_crispy_field}}
+    {{entry_form.Status.as_hidden}}
+
+<input type="submit" value="Submit" class="btn btn-success mt-2">
+<input type="reset" value="Reset" class="btn btn-warning mt-2">
+</form>
+
+</div>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+{% endblock load_vehical %}
+

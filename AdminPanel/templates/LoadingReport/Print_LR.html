@@ -1,0 +1,364 @@
+<html>
+    <head>
+        <title>
+            Print LR
+            </title>
+    </head>
+    {% load static %}
+  
+    {% comment %} #link for Responsive {% endcomment %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+    {% comment %} #bootstrap link for css {% endcomment %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    {% comment %} #link for animation {% endcomment %}
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   
+    {% comment %} link for bootstrap icons {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ 
+    <style>
+      .main{
+          border:2px solid black;
+      }
+  </style>
+    <body background=gray>
+        <div class="main">
+
+    
+          <center>  <div class="container">
+              <div style="">Loading Report - CONSIGNOR COPY</div>
+            <div>
+            <table style="text-align:center; width:100%; height:auto; border-radius:20px; ">
+                <tr><td> <h2>TAMBE TRANSPORT</h2></td></tr>
+                <tr><td style="font-size:13px;"> Parcel service from banglore to belgum $ Hubali All Maharashtra, Off. E-75/4 (Ranjangaon Fata),MIDC Waluj, Aurangabad-431136</td></tr>
+                <tr><td style="font-size:13px;">RM-83,New Shriramnagar Ranjangaon (S.P), Tq.Gangapur Dist.Aurangabad, Email :- tambetransport7096@gmail.com, Mobile :- 9923155578/9825252625</td></tr>
+            </div>
+            </table>
+        </div>
+                <hr style='border:1px solid black'>
+                    <div class="row text-center">
+                        <div class="col-sm-4 text-left" style="">
+                           <table>
+                               <tr style="text-align:center"><td> Booking Branch</td></tr>
+                               <tr><td> From : <b>{{data.From_company}}</b> <br></td></tr>
+                               <tr><td> Br.Code : {% if data.From_Branch_Code|length < 2 %}{% else %}<b>{{data.From_Branch_Code}}</b>{% endif %} </td></tr>
+
+                           </table>
+                        </div>
+                        <div class="col-sm-4" style="">
+                            <table>
+                                <tr style="text-align:center"><td> Delivery Branch</td></tr>
+                            <tr><td> To : <b> {{data.To_company}}</b> <br></td></tr>
+                            <tr><td> Br.Code : {% if data.To_Branch_Code|length < 2 %}{% else %}<b>{{data.To_Branch_Code}}</b>{% endif %} </td></tr>
+                            </table>
+                        </table>
+                        </div>
+                        <div class="col-sm-4" style="">
+                            <table>
+                                <tr><td>LR.No : <b> {{data.Auto_LR_No}} </b></td></tr>
+                            <tr><td> E_Way_Bill : {% if data.E_Way_Bill|length < 2 %}{% else %}<b>{{data.E_Way_Bill}}</b>{% endif %} </td></tr>
+                            <tr><td> Vehical No : <b>{{data.Vehical_No}}</b>  <br></td></tr>
+                            <tr><td> Date : <b>{{data.From_Date}}</b>  <br></td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr style="margin-bottom:-1px;">
+
+                  
+                    <table style="text-align:left"  width=100%>
+                        <tr>
+                            <td style="text-align:left">CONSIGNOR Name: <b>{{data.From_company}}</b></td>
+                            <td style="text-align:left">CONSIGNEE Name: <b>{{data.To_company}}</b></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">Address: <b>{{data.From_Adress}}</b></td>
+                            <td style="text-align:left">Address: <b>{{data.To_Adress}}</b></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">Mobile No: <b>{{data.From_Mobile}}</b>
+                            <td style="text-align:left">Mobile No: <b>{{data.To_Mobile}}</b>
+                        </tr>
+                    </table>
+
+                    <hr style=" margin-top:-1px;">
+
+                    <div class="row">
+                        <div class="col-sm-4"> PAN NO : <b> AIKPT1070B </b></div>
+                        <div class="col-sm-4">GSTIN NO : <b> 27AIKPT1070B1ZF </b></div>
+                        <div class="col-sm-4">INVOICE NO : <b> {{data.Invoice}} </b></div>
+                    </div>
+
+                    <hr style=" margin-top:-1px;">
+
+                    <table border=1; width=100%>
+                        <tr>
+                            <td style="width:10%; text-align:center">PARTICULARS</td>
+                            <td style="width:9%; text-align:center">Freight</td>
+                            <td style="width:9%; text-align:center">ST Charges</td>
+                            <td style="width:9%; text-align:center">Value Subcharge</td>
+                            <td style="width:9%; text-align:center">A.O.C</td>
+                            <td style="width:9%; text-align:center">Hamali Charges</td>
+                            <td style="width:9%; text-align:center">Other Charges</td>
+                            <td style="width:9%; text-align:center">Door Delivery</td>
+                            <td style="width:9%; text-align:center">SUB TOTAL</td>
+                            <td style="width:9%; text-align:center">GST {{data.GST_ToPay_Per}} %</td>
+                            <td style="width:9%; text-align:center">GRAND TOTAL</td>
+                        </tr>
+                        <tr style="text-align:center;">
+                           <td> Freight(To.Pay)</td>
+                            <td><b>&#X20B9; {{data.Freight_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.ST_Charges_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.Value_Subcharge_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.AOC_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.Hamali_Charges_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.Other_Charges_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.Door_Delivery_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.SUB_TOTAL_ToPay}}</b></td>
+                            <td><b>&#X20B9; {{data.GST_ToPay}} %</b></td>
+                            <td><b>&#X20B9; {{data.GRAND_TOTAL_ToPay}}</b></td>
+                            
+                        </tr>
+                        <tr style="text-align:center;">
+                           <td>Freight (Paid)</td>
+                           <td><b>&#X20B9; {{data.Freight_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.ST_Charges_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.Value_Subcharge_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.AOC_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.Hamali_Charges_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.Other_Charges_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.Door_Delivery_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.SUB_TOTAL_Paid}}</b></td>
+                           <td><b>&#X20B9; {{data.GST_Paid}} %</b></td>
+                           <td><b>&#X20B9; {{data.GRAND_TOTAL_Paid}}</b></td>
+                        </tr>
+                    </table>
+                    <table border=1; width=100% style="margin-top:10px;">
+                        <tr style="text-align:center">
+                            <td>Actual Weight</td>
+                            <td>Charged Weight</td>
+                            <td>Bins Or Boxes</td>
+                            <td>Item Type</td>
+                        </tr>
+                        <tr style="text-align:center">
+                            <td><b> {{data.Actual_Weight}}</b></td>
+                            <td><b> {{data.Charged_Weight}}</b></td>
+                            <td><b> {{data.Bins}} </b></td>
+                            <td><b> {{data.Item_Type}} </b></td>
+                        </tr>
+                    </table>
+
+                    <table border=1; width=100% style="margin-top:10px;">
+                        <tr>
+                            <td>DESCRIPTION (SAID TO CONTAIN) : <b>{{data.Description}}</b> </td>
+                        </tr>
+                    </table>
+
+                    <table border=1; width=100% style="margin-top:10px;">
+                        <tr>
+                            <td>Service Tax Paid By : 
+                                Transport <i class="bi bi-square"></i>
+                                Consignee <i class="bi bi-square"></i>
+                                Consignor <i class="bi bi-square"></i>
+                            </td>
+                            <td>BOOKED AT OWNER'S RISK</td>
+                        </tr>
+                    </table>
+
+                     <table border=1; width=100% style="margin-top:10px; height:50px;">
+                        <tr>
+                            <td width=30% style="text-align:left;margin:10px;">Delivery At : <b>{{data.To_Adress}}</b> <br> Phone No : <b>{{data.To_Mobile}}</b> </td>
+                            <td width=40% style="text-align:center">Company is not responsible for leackge damage and lose good in terminal subject enter continue text here</i></td>
+                            <b> <td width=30% style="text-align-center; padding-bottom:-10px;">SIGNATURE OF BOOKING CLEARK</td></b>
+                        </tr>
+                    </table>
+                    </div>
+                    <br>
+            </div>
+        </div>
+        <br>
+
+
+
+
+
+
+
+
+        
+        <div class="main">
+
+    
+            <center>  <div class="container">
+                <div style="">Loading Report - CONSIGNEE COPY</div>
+              <div>
+              <table style="text-align:center; width:100%; height:auto; border-radius:20px; ">
+                  <tr><td> <h2>TAMBE TRANSPORT</h2></td></tr>
+                  <tr><td style="font-size:13px;"> Parcel service from banglore to belgum $ Hubali All Maharashtra, Off. E-75/4 (Ranjangaon Fata),MIDC Waluj, Aurangabad-431136</td></tr>
+                  <tr><td style="font-size:13px;">RM-83,New Shriramnagar Ranjangaon (S.P), Tq.Gangapur Dist.Aurangabad, Email :- tambetransport7096@gmail.com, Mobile :- 9923155578/9825252625</td></tr>
+              </div>
+              </table>
+          </div>
+                  <hr style='border:1px solid black'>
+                      <div class="row text-center">
+                          <div class="col-sm-4 text-left" style="">
+                             <table>
+                                 <tr style="text-align:center"><td> Booking Branch</td></tr>
+                                 <tr><td> From : <b>{{data.From_company}}</b> <br></td></tr>
+                                 <tr><td> Br.Code : {% if data.From_Branch_Code|length < 2 %}{% else %}<b>{{data.From_Branch_Code}}</b>{% endif %} </td></tr>
+  
+                             </table>
+                          </div>
+                          <div class="col-sm-4" style="">
+                              <table>
+                                  <tr style="text-align:center"><td> Delivery Branch</td></tr>
+                              <tr><td> To : <b> {{data.To_company}}</b> <br></td></tr>
+                              <tr><td> Br.Code : {% if data.To_Branch_Code|length < 2 %}{% else %}<b>{{data.To_Branch_Code}}</b>{% endif %} </td></tr>
+                              </table>
+                          </table>
+                          </div>
+                          <div class="col-sm-4" style="">
+                              <table>
+                                  <tr><td>LR.No : <b> {{data.Auto_LR_No}} </b></td></tr>
+                              <tr><td> E_Way_Bill : {% if data.E_Way_Bill|length < 2 %}{% else %}<b>{{data.E_Way_Bill}}</b>{% endif %} </td></tr>
+                              <tr><td> Vehical No : <b>{{data.Vehical_No}}</b>  <br></td></tr>
+                              <tr><td> Date : <b>{{data.From_Date}}</b>  <br></td></tr>
+                              </table>
+                          </div>
+                      </div>
+                      <hr style="margin-bottom:-1px;">
+  
+                    
+                      <table style="text-align:left"  width=100%>
+                          <tr>
+                              <td style="text-align:left">CONSIGNOR Name: <b>{{data.From_company}}</b></td>
+                              <td style="text-align:left">CONSIGNEE Name: <b>{{data.To_company}}</b></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align:left">Address: <b>{{data.From_Adress}}</b></td>
+                              <td style="text-align:left">Address: <b>{{data.To_Adress}}</b></td>
+                          </tr>
+                          <tr>
+                              <td style="text-align:left">Mobile No: <b>{{data.From_Mobile}}</b>
+                              <td style="text-align:left">Mobile No: <b>{{data.To_Mobile}}</b>
+                          </tr>
+                      </table>
+  
+                      <hr style=" margin-top:-1px;">
+  
+                      <div class="row">
+                          <div class="col-sm-4"> PAN NO : <b> AIKPT1070B </b></div>
+                          <div class="col-sm-4">GSTIN NO : <b> 27AIKPT1070B1ZF </b></div>
+                          <div class="col-sm-4">INVOICE NO : <b> {{data.Invoice}} </b></div>
+                      </div>
+  
+                      <hr style=" margin-top:-1px;">
+  
+                      <table border=1; width=100%>
+                          <tr>
+                              <td style="width:10%; text-align:center">PARTICULARS</td>
+                              <td style="width:9%; text-align:center">Freight</td>
+                              <td style="width:9%; text-align:center">ST Charges</td>
+                              <td style="width:9%; text-align:center">Value Subcharge</td>
+                              <td style="width:9%; text-align:center">A.O.C</td>
+                              <td style="width:9%; text-align:center">Hamali Charges</td>
+                              <td style="width:9%; text-align:center">Other Charges</td>
+                              <td style="width:9%; text-align:center">Door Delivery</td>
+                              <td style="width:9%; text-align:center">SUB TOTAL</td>
+                              <td style="width:9%; text-align:center">GST {{data.GST_ToPay_Per}} %</td>
+                              <td style="width:9%; text-align:center">GRAND TOTAL</td>
+                          </tr>
+                          <tr style="text-align:center;">
+                             <td> Freight(To.Pay)</td>
+                              <td><b>&#X20B9; {{data.Freight_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.ST_Charges_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.Value_Subcharge_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.AOC_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.Hamali_Charges_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.Other_Charges_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.Door_Delivery_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.SUB_TOTAL_ToPay}}</b></td>
+                              <td><b>&#X20B9; {{data.GST_ToPay}} %</b></td>
+                              <td><b>&#X20B9; {{data.GRAND_TOTAL_ToPay}}</b></td>
+                              
+                          </tr>
+                          <tr style="text-align:center;">
+                             <td>Freight (Paid)</td>
+                             <td><b>&#X20B9; {{data.Freight_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.ST_Charges_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.Value_Subcharge_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.AOC_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.Hamali_Charges_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.Other_Charges_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.Door_Delivery_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.SUB_TOTAL_Paid}}</b></td>
+                             <td><b>&#X20B9; {{data.GST_Paid}} %</b></td>
+                             <td><b>&#X20B9; {{data.GRAND_TOTAL_Paid}}</b></td>
+                          </tr>
+                      </table>
+                      <table border=1; width=100% style="margin-top:10px;">
+                          <tr style="text-align:center">
+                              <td>Actual Weight</td>
+                              <td>Charged Weight</td>
+                              <td>Bins Or Boxes</td>
+                              <td>Item Type</td>
+                          </tr>
+                          <tr style="text-align:center">
+                              <td><b> {{data.Actual_Weight}}</b></td>
+                              <td><b> {{data.Charged_Weight}}</b></td>
+                              <td><b> {{data.Bins}} </b></td>
+                              <td><b> {{data.Item_Type}} </b></td>
+                          </tr>
+                      </table>
+  
+                      <table border=1; width=100% style="margin-top:10px;">
+                          <tr>
+                              <td>DESCRIPTION (SAID TO CONTAIN) : <b>{{data.Description}}</b> </td>
+                          </tr>
+                      </table>
+  
+                      <table border=1; width=100% style="margin-top:10px;">
+                          <tr>
+                              <td>Service Tax Paid By : 
+                                  Transport <i class="bi bi-square"></i>
+                                  Consignee <i class="bi bi-square"></i>
+                                  Consignor <i class="bi bi-square"></i>
+                              </td>
+                              <td>BOOKED AT OWNER'S RISK</td>
+                          </tr>
+                      </table>
+  
+                       <table border=1; width=100% style="margin-top:10px; height:50px;">
+                          <tr>
+                              <td width=30% style="text-align:left;margin:10px;">Delivery At : <b>{{data.To_Adress}}</b> <br> Phone No : <b>{{data.To_Mobile}}</b> </td>
+                              <td width=40% style="text-align:center">Company is not responsible for leackge damage and lose good in terminal subject enter continue text here</i></td>
+                              <b> <td width=30% style="text-align-center; padding-bottom:-10px;">SIGNATURE OF BOOKING CLEARK</td></b>
+                          </tr>
+                      </table>
+                      </div>
+                      <br>
+              </div>
+          </div>
+          <br>
+  
+
+   
+   
+   
+   
+   
+        <form> 
+            
+                <center>
+                <input type="button" value="Print this page" onClick="window.print()">
+                </form></center>
+        </center>
+    </body>
+</html>

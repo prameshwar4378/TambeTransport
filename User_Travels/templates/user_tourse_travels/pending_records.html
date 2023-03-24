@@ -1,0 +1,68 @@
+{% extends 'user_tourse_travels/Base.html' %}
+{% load crispy_forms_tags %}
+{% block pending_records %}
+<h4 class="text-center alert alert-primary mt-2"> Pending Records </h4>
+
+ <div class="table_scroll" >
+      <table class="table table-hover" >
+          {% if rec %}
+          <thead>
+            <tr style='background-color: rgb(3, 74, 116);'>
+              <th scope="col" class="text-center text-white">Sr.No</th>
+              <th scope="col" class="text-center text-white">Entry Number</th>
+              <th scope="col" class="text-center text-white">Vehical_No</th>
+              <th scope="col" class="text-center text-white">Vehical_Type</th>
+              <th scope="col" class="text-center text-white">Arivel_City</th>
+              <th scope="col" class="text-center text-white">Arivel_Time</th>
+              <th scope="col" class="text-center text-white">Destination_City</th>
+              <th scope="col" class="text-center text-white">Opning_Km</th>
+              <th scope="col" class="text-center text-white">Opning_Km_Photo</th>
+              <th scope="col" class="text-center text-white">Cust_Name</th>
+              <th scope="col" class="text-center text-white">Cust_Photo</th>
+              <th scope="col" class="text-center text-white">Manage Diesel</th>
+              <th scope="col" class="text-center text-white">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for r in rec %}
+            <tr class="text-center">      
+              <td>{{forloop.counter}}</td>
+              <td>{{r.id}}</td>
+              <td>{{r.vehical_no}}</td>
+              <td>{{r.vehical_type}}</td>
+              <td>{{r.arivel_city}}</td>
+              <td>{{r.arivel_time}}</td>
+              <td>{{r.destination_city}}</td>
+              <td>{{r.opning_km}}</td>
+              <td><a href="{{r.opning_km_photo.url}}" download> Download</a></td>
+              <td>{{r.cust_name}}</td>
+
+              {% if r.cust_photo.url == '/media/static/default.jpg' %}
+              <td>-</td>
+              {% else %}
+              <td><a href="{{r.cust_photo.url}}" download> Download</a></td>
+              {% endif %}
+              
+              <td><a href="{% url 'manage_diesel' r.id %}" class="btn btn-primary"> Manage Diesel</a></td>
+              <td><a href="{% url 'drop_cust' r.id %}" class="btn btn-primary"> Drop</a></td>
+              
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+        {% else %}
+        <center><h5>No Record Found</h5></center>
+        {% endif %}
+  </div>
+  </div>
+  
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  {% for msg in messages %}
+  swal("Done", "{{msg}}", "success");
+{% endfor %}
+</script>
+
+{% endblock pending_records %}

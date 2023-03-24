@@ -1,0 +1,45 @@
+{% extends 'LoadingReport/Base.html' %}
+{% block title %} Enquiry {% endblock title %}
+{% block Enquiry %}
+
+<div class="container">
+    <div class="col-sm-12">
+      <h4 class="text-center alert alert-dark mt-2">Enquiry Records</h4>
+      <div class="table_scroll" >
+      <table class="table table-hover" >
+          {% if data %}
+          <thead>
+            <tr style="background-color: rgb(3, 74, 116);">
+              <th scope="col" class="text-center text-white" style="">Sr.No</th>
+              <th scope="col" class="text-center text-white">Enquiry No</th>
+              <th scope="col" class="text-center text-white">Customer Name</th>
+              <th scope="col" class="text-center text-white">Contact No</th>
+              <th scope="col" class="text-center text-white">Message</th>
+              <th scope="col" class="text-center text-white">Enquiry Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for r in data %}
+            <tr class="text-center">      
+              <td>{{forloop.counter}}</td>
+              <td>{{r.id}}</td>
+              <td>{{r.cust_name}}</td>
+              <td>{{r.cust_mobile}}</td>
+              <td>{{r.cust_message}}</td>
+              <td>{{r.enquiry_date}}</td>
+            </tr>
+          {% endfor %}
+  
+          
+          </tbody>
+        </table>
+      </div>
+        {% else %}
+        <center><h5>No Record Found</h5></center>
+        {% endif %}
+  </div>
+  </div>
+  </center>
+  
+
+{% endblock Enquiry %}
